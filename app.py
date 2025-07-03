@@ -40,14 +40,11 @@ uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "pn
 if uploaded_image is not None:
     img = Image.open(uploaded_image).convert('RGB')     # Ensure 3 channels
     img = img.resize((224, 224))
-    st.image(img, caption="Uploaded Image")
 
     image_array = preprocess_image(img)
     predictions = model.predict(image_array)
     confidence = float(predictions[0][0])
     predicted_label = "Pneumonia" if confidence > 0.5 else "Normal"
-    st.markdown(f"### Prediction: **{predicted_label}**")
-    st.write(f"Confidence: {'High' if confidence > 0.75 or confidence < 0.25 else 'Low'} `{confidence:.4f}`")
 
     # Convert to NumPy array
     img_np = np.array(img)
@@ -64,5 +61,13 @@ if uploaded_image is not None:
     heatmap_resized = np.uint8(255 * heatmap_resized)
     heatmap_color = cv2.applyColorMap(heatmap_resized, cv2.COLORMAP_JET)
     superimposed_img = cv2.addWeighted(img_np, 0.6, heatmap_color, 0.4, 0)
+
     # Display result
-    st.image(superimposed_img, caption="Grad-CAM Heatmap", channels="RGB")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image(img, caption="Uploaded Image", use_container_width=True)
+    with col2:
+        st.image(superimposed_img, caption="Grad-CAM Heatmap", channels="RGB", use_container_width=True)
+
+    st.markdown(f"### Prediction: **{predicted_label}**")
+    st.write(f"Confidence: {'High' if confidence > 0.75 or confidence < 0.25 else 'Low'} `{confidence:.4f}`")
