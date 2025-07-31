@@ -3,9 +3,10 @@ import streamlit as st
 from PIL import Image
 import numpy as np
 import tensorflow as tf
+import keras
 
 # Load my saved model
-model = tf.keras.models.load_model("finalmodel.keras")
+model = keras.models.load_model("finalmodel.keras")
 
 # Preprocess uploaded image
 def preprocess_image(image):
