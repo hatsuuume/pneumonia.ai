@@ -37,6 +37,7 @@ st.title("Pneumonia Detection")
 st.write("Upload a chest X-ray image to classify it as **Pneumonia** or **Normal**. Project by Claire Zhang MHJC 9F2")
 
 uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+
 with st.expander("View Privacy Statement"):
     st.markdown("""
     **Privacy Statement**  
