@@ -34,7 +34,7 @@ def make_gradcam_heatmap(img_array, model, last_conv_layer_name):
 
 # Streamlit UI
 st.title("Pneumonia Detection")
-st.write("Upload a chest X-ray image to classify it as **Pneumonia** or **Normal**. By Claire Zhang MHJC 9F2")
+st.write("Upload a chest X-ray image to classify it as **Pneumonia** or **Normal**. Project by Claire Zhang MHJC 9F2")
 
 uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 with st.expander("View Privacy Statement"):
